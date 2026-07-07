@@ -27,6 +27,7 @@ if ('IntersectionObserver' in window) {
   });
 }
 
+
 // ---------- POKÉDEX COMPONENT ----------
 // Detail content keyed by data-detail id on each .pdx-entry button.
 const pdxData = {
@@ -114,11 +115,15 @@ pdxEntries.forEach(entry => {
 });
 
 // Scroll-focus effect: entries nearer the vertical center of the list
-// scale up slightly, echoing the in-game list highlight as you scroll.
+// scale up more prominently, and the closest one auto-selects — echoing
+// the in-game behavior where scrolling the list moves the selection cursor.
 function updateScrollFocus() {
   if (!pdxList) return;
   const listRect = pdxList.getBoundingClientRect();
   const centerY = listRect.top + listRect.height / 2;
+  let closestEntry = null;
+  let closestDistance = Infinity;
+
   pdxEntries.forEach(entry => {
     if (entry.hidden) return;
     const rect = entry.getBoundingClientRect();
@@ -126,9 +131,18 @@ function updateScrollFocus() {
     const distance = Math.abs(centerY - entryCenter);
     const maxDistance = listRect.height / 2;
     const proximity = Math.max(0, 1 - distance / maxDistance);
-    const scale = 1 + proximity * 0.05;
+    const scale = 1 + proximity * 0.14;
     entry.style.transform = `scale(${scale})`;
+
+    if (distance < closestDistance) {
+      closestDistance = distance;
+      closestEntry = entry;
+    }
   });
+
+  if (closestEntry && !closestEntry.classList.contains('is-selected')) {
+    selectEntry(closestEntry);
+  }
 }
 
 if (pdxList) {
