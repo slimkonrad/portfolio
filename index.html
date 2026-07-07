@@ -54,100 +54,63 @@
     </p>
   </section>
 
-  <!-- DEX (projects) -->
+  <!-- DEX (categorized, game-style list + detail viewer) -->
   <section id="dex" class="section wrap">
     <h2 class="section-title"><span class="section-num">№</span> The Dex</h2>
     <p class="section-note">
-      Every project logged on capture — not a highlight reel, just what's actually been built so far.
-      Replace these entries with your real class projects and hackathon build.
+      Three logs — CS projects, internships/research, and work experience. Pick a category,
+      scroll the list, click an entry for the full readout.
     </p>
 
-    <div class="dex-list">
+    <div class="pokedex" id="pokedex">
 
-      <article class="dex-entry">
-        <div class="dex-head">
-          <span class="dex-num">#001</span>
-          <span class="dex-type type-code">CODE</span>
-          <span class="dex-status status-progress">In Progress</span>
-        </div>
-        <h3 class="dex-title">Color Wheel Clock</h3>
-        <p class="dex-desc">
-          An iOS app that rethinks how time is displayed — instead of numbers or hands,
-          time is represented through a shifting color wheel, using hue, saturation, and
-          brightness to convey the hour and minute visually. Later added an alarm feature
-          and file upload support. Built for a CSPC course at CSUF.
-        </p>
-        <div class="dex-stack">
-          <span>Swift</span><span>iOS</span><span>Xcode</span>
-        </div>
-        <div class="dex-links">
-          <a href="https://github.com/slimkonrad/Color-Wheel-Clock">Code →</a>
-        </div>
-      </article>
+      <div class="pokedex-tabs">
+        <button class="pdx-tab is-active" data-cat="projects">
+          CS Projects <span class="pdx-count" data-count="projects">1</span>
+        </button>
+        <button class="pdx-tab" data-cat="internships">
+          Internships <span class="pdx-count" data-count="internships">1</span>
+        </button>
+        <button class="pdx-tab" data-cat="experience">
+          Experience <span class="pdx-count" data-count="experience">1</span>
+        </button>
+      </div>
 
-      <article class="dex-entry">
-        <div class="dex-head">
-          <span class="dex-num">#002</span>
-          <span class="dex-type type-speed">SPEEDRUN</span>
-          <span class="dex-status status-hackathon">Hackathon</span>
-        </div>
-        <h3 class="dex-title">[Hackathon Project Name]</h3>
-        <p class="dex-desc">
-          What did your team build under the time limit? What was your specific role —
-          data, backend, frontend? What constraint made it interesting?
-        </p>
-        <div class="dex-stack">
-          <span>Add tools here</span>
-        </div>
-        <div class="dex-links">
-          <a href="#">Code →</a>
-          <a href="#">Devpost →</a>
-        </div>
-      </article>
+      <div class="pokedex-body">
 
-      <article class="dex-entry">
-        <div class="dex-head">
-          <span class="dex-num">#003</span>
-          <span class="dex-type type-code">CODE</span>
-          <span class="dex-status status-progress">In Progress</span>
-        </div>
-        <h3 class="dex-title">[Class Project Name]</h3>
-        <p class="dex-desc">
-          Course + what you built for it. Frame it like a real feature, not a homework assignment.
-        </p>
-        <div class="dex-stack">
-          <span>Add tools here</span>
-        </div>
-        <div class="dex-links">
-          <a href="#">Code →</a>
-        </div>
-      </article>
+        <div class="pdx-list" id="pdxList">
 
-      <article class="dex-entry dex-add">
-        <p>+ next capture goes here</p>
-      </article>
+          <button class="pdx-entry is-selected" data-cat="projects" data-detail="colorwheel">
+            <span class="pdx-flag">001</span>
+            <span class="pdx-icon">◆</span>
+            <span class="pdx-name">Color Wheel Clock</span>
+          </button>
+          <button class="pdx-entry" data-cat="projects" data-detail="proj-add">
+            <span class="pdx-flag">002</span>
+            <span class="pdx-icon">＋</span>
+            <span class="pdx-name">[Next capture]</span>
+          </button>
 
+          <button class="pdx-entry" data-cat="internships" data-detail="pfas" hidden>
+            <span class="pdx-flag">001</span>
+            <span class="pdx-icon">◆</span>
+            <span class="pdx-name">PFAS Water Research</span>
+          </button>
+
+          <button class="pdx-entry" data-cat="experience" data-detail="spa" hidden>
+            <span class="pdx-flag">001</span>
+            <span class="pdx-icon">◆</span>
+            <span class="pdx-name">Spa Advisor — South Coast Winery</span>
+          </button>
+
+        </div>
+
+        <div class="pdx-detail" id="pdxDetail">
+          <!-- populated by script.js -->
+        </div>
+
+      </div>
     </div>
-  </section>
-
-  <!-- SIDE QUEST (research, kept small & secondary) -->
-  <section class="section wrap side-quest">
-    <h2 class="section-title small-title"><span class="section-num">◆</span> Side Quest</h2>
-    <article class="dex-entry dex-entry-compact">
-      <div class="dex-head">
-        <span class="dex-num">2022–23</span>
-        <span class="dex-type type-research">RESEARCH</span>
-      </div>
-      <h3 class="dex-title">PFAS Water Contamination Research</h3>
-      <p class="dex-desc">
-        Researched PFAS contamination levels to assess health and safety concerns for local
-        water supplies. Pulled and cross-referenced data across multiple databases, then
-        compiled findings into structured reports for faculty review.
-      </p>
-      <div class="dex-stack">
-        <span>Data Analysis</span><span>Research</span><span>Documentation</span>
-      </div>
-    </article>
   </section>
 
   <!-- ABOUT / TRAINER PROFILE -->
