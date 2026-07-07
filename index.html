@@ -18,7 +18,7 @@
   <div class="wrap header-inner">
     <a href="#top" class="mark">KR<span class="mark-dot">_</span></a>
     <nav class="nav">
-      <a href="#dex">Dex</a>
+      <a href="dex.html">Dex</a>
       <a href="#about">Trainer</a>
       <a href="#skills">Stats</a>
       <a href="#contact">Contact</a>
@@ -54,63 +54,17 @@
     </p>
   </section>
 
-  <!-- DEX (categorized, game-style list + detail viewer) -->
+  <!-- DEX TEASER (full Dex now lives on its own page) -->
   <section id="dex" class="section wrap">
     <h2 class="section-title"><span class="section-num">№</span> The Dex</h2>
     <p class="section-note">
-      Three logs — CS projects, internships/research, and work experience. Pick a category,
-      scroll the list, click an entry for the full readout.
+      Three logs — CS projects, internships/research, and work experience — live on their
+      own page so this one stays uncluttered.
     </p>
-
-    <div class="pokedex" id="pokedex">
-
-      <div class="pokedex-tabs">
-        <button class="pdx-tab is-active" data-cat="projects">
-          CS Projects <span class="pdx-count" data-count="projects">1</span>
-        </button>
-        <button class="pdx-tab" data-cat="internships">
-          Internships <span class="pdx-count" data-count="internships">1</span>
-        </button>
-        <button class="pdx-tab" data-cat="experience">
-          Experience <span class="pdx-count" data-count="experience">1</span>
-        </button>
-      </div>
-
-      <div class="pokedex-body">
-
-        <div class="pdx-list" id="pdxList">
-
-          <button class="pdx-entry is-selected" data-cat="projects" data-detail="colorwheel">
-            <span class="pdx-flag">001</span>
-            <span class="pdx-icon">◆</span>
-            <span class="pdx-name">Color Wheel Clock</span>
-          </button>
-          <button class="pdx-entry" data-cat="projects" data-detail="proj-add">
-            <span class="pdx-flag">002</span>
-            <span class="pdx-icon">＋</span>
-            <span class="pdx-name">[Next capture]</span>
-          </button>
-
-          <button class="pdx-entry" data-cat="internships" data-detail="pfas" hidden>
-            <span class="pdx-flag">001</span>
-            <span class="pdx-icon">◆</span>
-            <span class="pdx-name">PFAS Water Research</span>
-          </button>
-
-          <button class="pdx-entry" data-cat="experience" data-detail="spa" hidden>
-            <span class="pdx-flag">001</span>
-            <span class="pdx-icon">◆</span>
-            <span class="pdx-name">Spa Advisor — South Coast Winery</span>
-          </button>
-
-        </div>
-
-        <div class="pdx-detail" id="pdxDetail">
-          <!-- populated by script.js -->
-        </div>
-
-      </div>
-    </div>
+    <a href="dex.html" class="dex-teaser">
+      <span class="dex-teaser-label">Open the Dex</span>
+      <span class="dex-teaser-arrow">→</span>
+    </a>
   </section>
 
   <!-- ABOUT / TRAINER PROFILE -->

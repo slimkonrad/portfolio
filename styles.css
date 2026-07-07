@@ -44,7 +44,21 @@ body {
 }
 
 .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 24px; }
+.wrap-wide { max-width: 1040px; margin: 0 auto; padding: 0 24px; }
 a { color: inherit; }
+
+/* ---------- DEX PAGE (standalone) ---------- */
+.dex-page-head { padding: 48px 24px 32px; }
+.dex-back {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--ink-soft);
+  text-decoration: none;
+  margin-bottom: 18px;
+}
+.dex-back:hover { color: var(--dex-red); }
 
 /* faint scanline texture instead of realistic grain — nods to a handheld screen */
 .scanlines {
@@ -237,6 +251,26 @@ a { color: inherit; }
 
 .side-quest { padding-top: 40px; }
 
+.dex-teaser {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--screen-raised);
+  border: 3px solid var(--ink);
+  border-radius: 10px;
+  box-shadow: 5px 5px 0 var(--ink);
+  padding: 20px 26px;
+  text-decoration: none;
+  color: var(--ink);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.dex-teaser:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 7px 7px 0 var(--ink);
+}
+.dex-teaser-label { font-family: var(--pixel); font-size: 0.85rem; }
+.dex-teaser-arrow { color: var(--dex-red); font-size: 1.2rem; }
+
 /* ---------- POKÉDEX COMPONENT ---------- */
 .pokedex {
   background: var(--screen-raised);
@@ -283,15 +317,17 @@ a { color: inherit; }
 
 .pokedex-body {
   display: grid;
-  grid-template-columns: 260px 1fr;
-  min-height: 340px;
+  grid-template-columns: 1fr 300px;
+  min-height: 460px;
 }
 
 .pdx-list {
-  border-right: 3px solid var(--line);
+  order: 2;
+  border-left: 3px solid var(--line);
+  border-right: none;
   overflow-y: auto;
-  max-height: 420px;
-  padding: 14px 10px;
+  max-height: 560px;
+  padding: 14px 10px 14px 26px;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -350,9 +386,10 @@ a { color: inherit; }
 .pdx-name { font-size: 13.5px; font-weight: 600; }
 
 .pdx-detail {
-  padding: 26px;
+  order: 1;
+  padding: 36px;
   overflow-y: auto;
-  max-height: 420px;
+  max-height: 560px;
 }
 .pdx-detail-empty { color: var(--ink-soft); font-family: var(--mono); font-size: 13px; }
 
@@ -391,39 +428,16 @@ a { color: inherit; }
 }
 .pdx-detail-links a:hover { border-color: var(--dex-red); }
 
-@media (max-width: 720px) {
+@media (max-width: 900px) {
   .pokedex-body { grid-template-columns: 1fr; }
-  .pdx-list { border-right: none; border-bottom: 3px solid var(--line); max-height: 260px; }
-}
-
-/* ---------- FIXED SIDE-PANEL MODE (wide screens) ---------- */
-/* On wide viewports, the Dex pins to the right edge and stays visible
-   as the rest of the page scrolls — like a handheld Pokédex staying open
-   while you browse. Below the breakpoint it reverts to a normal inline card. */
-@media (min-width: 1240px) {
-  body { padding-right: 340px; }
-
-  #dex.section { border-top: none; padding-top: 56px; }
-  #dex .section-title,
-  #dex .section-note { max-width: 640px; }
-
-  .pokedex {
-    position: fixed;
-    top: 50%;
-    right: 24px;
-    transform: translateY(-50%);
-    width: 320px;
-    max-height: 78vh;
-    z-index: 5;
-  }
-  .pokedex-body { grid-template-columns: 1fr; min-height: 0; }
   .pdx-list {
-    border-right: none;
-    border-bottom: 3px solid var(--line);
-    max-height: 260px;
-    padding-left: 22px;
+    order: 2;
+    border-left: none;
+    border-top: 3px solid var(--line);
+    max-height: 280px;
+    padding-left: 26px;
   }
-  .pdx-detail { max-height: 280px; padding: 20px; }
+  .pdx-detail { order: 1; max-height: none; }
 }
 
 /* ---------- ABOUT ---------- */

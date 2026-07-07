@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Dex — Konner Rigby</title>
+<meta name="description" content="Konner Rigby's Dex — CS projects, internships, and work experience.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=JetBrains+Mono:wght@400;500;700&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="scanlines"></div>
+
+<header class="site-header">
+  <div class="wrap-wide header-inner">
+    <a href="index.html" class="mark">KR<span class="mark-dot">_</span></a>
+    <nav class="nav">
+      <a href="dex.html" style="color: var(--dex-red);">Dex</a>
+      <a href="index.html#about">Trainer</a>
+      <a href="index.html#skills">Stats</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <div class="dex-page-head wrap-wide">
+    <a href="index.html" class="dex-back">← Back to home</a>
+    <h1 class="section-title" style="margin: 0 0 10px;"><span class="section-num">№</span> The Dex</h1>
+    <p class="section-note" style="margin: 0;">
+      Three logs — CS projects, internships/research, and work experience. Pick a category,
+      scroll the list, click (or scroll to) an entry for the full readout.
+    </p>
+  </div>
+
+  <section class="wrap-wide" style="padding: 0 24px 64px;">
+
+    <div class="pokedex" id="pokedex">
+
+      <div class="pokedex-tabs">
+        <button class="pdx-tab is-active" data-cat="projects">
+          CS Projects <span class="pdx-count" data-count="projects">1</span>
+        </button>
+        <button class="pdx-tab" data-cat="internships">
+          Internships <span class="pdx-count" data-count="internships">1</span>
+        </button>
+        <button class="pdx-tab" data-cat="experience">
+          Experience <span class="pdx-count" data-count="experience">1</span>
+        </button>
+      </div>
+
+      <div class="pokedex-body">
+
+        <div class="pdx-detail" id="pdxDetail">
+          <!-- populated by script.js -->
+        </div>
+
+        <div class="pdx-list" id="pdxList">
+
+          <button class="pdx-entry is-selected" data-cat="projects" data-detail="colorwheel">
+            <span class="pdx-flag">001</span>
+            <span class="pdx-icon">◆</span>
+            <span class="pdx-name">Color Wheel Clock</span>
+          </button>
+          <button class="pdx-entry" data-cat="projects" data-detail="proj-add">
+            <span class="pdx-flag">002</span>
+            <span class="pdx-icon">＋</span>
+            <span class="pdx-name">[Next capture]</span>
+          </button>
+
+          <button class="pdx-entry" data-cat="internships" data-detail="pfas" hidden>
+            <span class="pdx-flag">001</span>
+            <span class="pdx-icon">◆</span>
+            <span class="pdx-name">PFAS Water Research</span>
+          </button>
+
+          <button class="pdx-entry" data-cat="experience" data-detail="spa" hidden>
+            <span class="pdx-flag">001</span>
+            <span class="pdx-icon">◆</span>
+            <span class="pdx-name">Spa Advisor — South Coast Winery</span>
+          </button>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer wrap-wide">
+  <p>Built by Konner Rigby. Last updated 2026.</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
