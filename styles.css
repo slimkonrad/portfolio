@@ -311,7 +311,9 @@ a { color: inherit; }
   text-align: left;
   transform-origin: left center;
   transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  position: relative;
 }
+.pdx-entry[hidden] { display: none; }
 .pdx-entry:hover {
   transform: scale(1.06);
   box-shadow: 3px 3px 0 var(--line);
@@ -320,6 +322,13 @@ a { color: inherit; }
 .pdx-entry.is-selected {
   background: var(--dex-red);
   border-color: var(--ink);
+}
+.pdx-entry.is-selected::before {
+  content: '▶';
+  position: absolute;
+  left: -18px;
+  color: var(--dex-red);
+  font-size: 13px;
 }
 .pdx-entry.is-selected .pdx-flag { background: var(--ink); color: var(--dex-red); }
 .pdx-entry.is-selected .pdx-name { color: #fff; }
@@ -385,6 +394,36 @@ a { color: inherit; }
 @media (max-width: 720px) {
   .pokedex-body { grid-template-columns: 1fr; }
   .pdx-list { border-right: none; border-bottom: 3px solid var(--line); max-height: 260px; }
+}
+
+/* ---------- FIXED SIDE-PANEL MODE (wide screens) ---------- */
+/* On wide viewports, the Dex pins to the right edge and stays visible
+   as the rest of the page scrolls — like a handheld Pokédex staying open
+   while you browse. Below the breakpoint it reverts to a normal inline card. */
+@media (min-width: 1240px) {
+  body { padding-right: 340px; }
+
+  #dex.section { border-top: none; padding-top: 56px; }
+  #dex .section-title,
+  #dex .section-note { max-width: 640px; }
+
+  .pokedex {
+    position: fixed;
+    top: 50%;
+    right: 24px;
+    transform: translateY(-50%);
+    width: 320px;
+    max-height: 78vh;
+    z-index: 5;
+  }
+  .pokedex-body { grid-template-columns: 1fr; min-height: 0; }
+  .pdx-list {
+    border-right: none;
+    border-bottom: 3px solid var(--line);
+    max-height: 260px;
+    padding-left: 22px;
+  }
+  .pdx-detail { max-height: 280px; padding: 20px; }
 }
 
 /* ---------- ABOUT ---------- */
