@@ -192,6 +192,84 @@ function updateScrollFocus() {
   }
 }
 
+// ---------- HERO PREVIEW (mini, non-interactive Dex) ----------
+// Same idea as the real list's updateScrollFocus: each frame, measure every
+// pill's distance from the window's vertical center, scale/fade it based on
+// that distance, and mark whichever pill is closest to center as the
+// "selected" one (red) — so the highlight always tracks a real entry
+// instead of sitting on a fixed overlay bar.
+(function setupHeroPreview() {
+  const previewContainer = document.querySelector('.hero-cta-preview');
+  const previewTrack = document.querySelector('.hero-cta-preview-track');
+  if (!previewContainer || !previewTrack) return;
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const pills = Array.from(previewTrack.querySelectorAll('.preview-pill'));
+  const speed = 15; // px per second
+  let pos = 0;
+  let lastTime = null;
+  let loopDistance = 0;
+
+  function measure() {
+    // The pill list is duplicated in the HTML so it can loop seamlessly;
+    // half the track's height is exactly one full pass through the list.
+    loopDistance = previewTrack.scrollHeight / 2;
+  }
+
+  function updateFocusStyles() {
+    const containerRect = previewContainer.getBoundingClientRect();
+    const centerY = containerRect.top + containerRect.height / 2;
+    const maxDistance = containerRect.height / 2;
+    let closest = null;
+    let closestDistance = Infinity;
+
+    pills.forEach((pill) => {
+      const rect = pill.getBoundingClientRect();
+      const pillCenter = rect.top + rect.height / 2;
+      const distance = Math.abs(centerY - pillCenter);
+      const proximity = Math.max(0, 1 - distance / maxDistance) ** 1.5;
+      const scale = 0.82 + proximity * 0.31;
+      const opacity = 0.28 + proximity * 0.72;
+      pill.style.transform = `scale(${scale})`;
+      pill.style.opacity = opacity;
+
+      if (distance < closestDistance) {
+        closestDistance = distance;
+        closest = pill;
+      }
+    });
+
+    // The highlighted entry should always read as a solid, true red — like
+    // the trainer card's — not blended/muted by a sub-1 opacity value.
+    if (closest) {
+      closest.style.opacity = 1;
+    }
+
+    pills.forEach((pill) => pill.classList.toggle('is-centered', pill === closest));
+  }
+
+  function frame(time) {
+    if (lastTime === null) lastTime = time;
+    const dt = (time - lastTime) / 1000;
+    lastTime = time;
+
+    pos += speed * dt;
+    if (loopDistance > 0 && pos >= loopDistance) pos -= loopDistance;
+    previewTrack.style.transform = `translateY(${-pos}px)`;
+
+    updateFocusStyles();
+    requestAnimationFrame(frame);
+  }
+
+  measure();
+  updateFocusStyles();
+  window.addEventListener('resize', measure);
+
+  if (!reduceMotion) {
+    requestAnimationFrame(frame);
+  }
+})();
+
 if (pdxList) {
   let scrollFrame = null;
   pdxList.addEventListener('scroll', () => {

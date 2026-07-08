@@ -5,6 +5,12 @@ Theme: an original "Trainer Card / Dex" concept inspired by handheld game UI —
 no Nintendo/Game Freak logos, fonts, or character art are used, just the shape of
 the idea (trainer card, dex entries, type badges, stat bars).
 
+# Hard Rules 
+
+Do not change anything about the links already provided for contact.
+Do not add accent marks to resume.
+Do not put "Add if applicable" or anything similar to stats. 
+
 ## File structure
 ```
 portfolio/
