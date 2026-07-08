@@ -59,6 +59,7 @@ const pdxData = {
     cat: 'Experience',
     num: '#001',
     title: 'Spa Advisor — South Coast Winery',
+    duration: 'June 2025 - Present',
     desc: 'Resolved customer inquiries and product questions, consistently delivering efficient and positive service experiences. Maintained workspace cleanliness and organization standards. Adapted quickly to shifting priorities in a high-volume environment.',
     stack: ['Customer Service', 'Attention to Detail', 'Time Management'],
     links: []
@@ -83,6 +84,7 @@ function renderDetail(id) {
       <span class="pdx-detail-cat">${d.cat}</span>
     </div>
     <h3 class="pdx-detail-title">${d.title}</h3>
+    <p class="pdx-detail-duration">${d.duration || ''}</p>
     <p class="pdx-detail-desc">${d.desc}</p>
     <div class="pdx-detail-stack">${d.stack.map(s => `<span>${s}</span>`).join('')}</div>
     <div class="pdx-detail-links">${links}</div>

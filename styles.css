@@ -406,6 +406,7 @@ a { color: inherit; }
   color: var(--dex-blue);
 }
 .pdx-detail-title { font-family: var(--sans); font-weight: 700; font-size: 1.3rem; margin: 0 0 12px; }
+.pdx-detail-duration { font-family: var(--mono); font-size: 12.5px; color: var(--ink-soft); margin: -6px 0 14px; }
 .pdx-detail-desc { color: var(--ink-soft); font-size: 14.5px; max-width: 60ch; margin: 0 0 18px; }
 .pdx-detail-stack { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
 .pdx-detail-stack span {
