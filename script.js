@@ -65,6 +65,14 @@ const pdxData = {
     desc: 'Resolved customer inquiries and product questions, consistently delivering efficient and positive service experiences. Maintained workspace cleanliness and organization standards. Adapted quickly to shifting priorities in a high-volume environment.',
     stack: ['Customer Service', 'Attention to Detail', 'Time Management'],
     links: []
+  },
+  unknown: {
+    cat: '???',
+    num: '#???',
+    title: 'Not yet captured',
+    desc: 'This entry is still out there. Filler slot for scroll-testing — swap it out once a real project lands here.',
+    stack: [],
+    links: []
   }
 };
 
@@ -72,6 +80,8 @@ const pdxList = document.getElementById('pdxList');
 const pdxDetailPanel = document.getElementById('pdxDetail');
 const pdxTabs = document.querySelectorAll('.pdx-tab');
 const pdxEntries = document.querySelectorAll('.pdx-entry');
+const pdxSpacerTop = document.getElementById('pdxSpacerTop');
+const pdxSpacerBottom = document.getElementById('pdxSpacerBottom');
 
 function renderDetail(id) {
   const d = pdxData[id];
@@ -100,6 +110,27 @@ function selectEntry(entry) {
   renderDetail(entry.dataset.detail);
 }
 
+function centerEntry(entry) {
+  if (!entry || !pdxList) return;
+  const listRect = pdxList.getBoundingClientRect();
+  const entryRect = entry.getBoundingClientRect();
+  const offset = (entryRect.top + entryRect.height / 2) - (listRect.top + listRect.height / 2);
+  pdxList.scrollTop += offset;
+}
+
+// Size the top/bottom spacers so the FIRST and LAST real entries can also
+// be scrolled all the way to the visual center — without this, an entry
+// at either end of the list could never truly reach center, which is what
+// caused the selected entry and the "enlarged" entry to disagree.
+function setupSpacers() {
+  if (!pdxList || !pdxSpacerTop || !pdxSpacerBottom) return;
+  const sample = pdxList.querySelector('.pdx-entry:not([hidden])');
+  const entryHeight = sample ? sample.offsetHeight : 46;
+  const half = Math.max(0, (pdxList.clientHeight - entryHeight) / 2);
+  pdxSpacerTop.style.height = `${half}px`;
+  pdxSpacerBottom.style.height = `${half}px`;
+}
+
 function showCategory(cat) {
   pdxTabs.forEach(t => t.classList.toggle('is-active', t.dataset.cat === cat));
   let firstVisible = null;
@@ -108,7 +139,10 @@ function showCategory(cat) {
     entry.hidden = !match;
     if (match && !firstVisible) firstVisible = entry;
   });
-  if (firstVisible) selectEntry(firstVisible);
+  if (firstVisible) {
+    selectEntry(firstVisible);
+    centerEntry(firstVisible);
+  }
 }
 
 pdxTabs.forEach(tab => {
@@ -116,12 +150,16 @@ pdxTabs.forEach(tab => {
 });
 
 pdxEntries.forEach(entry => {
-  entry.addEventListener('click', () => selectEntry(entry));
+  entry.addEventListener('click', () => {
+    selectEntry(entry);
+    centerEntry(entry);
+  });
 });
 
-// Scroll-focus effect: entries nearer the vertical center of the list
-// scale up more prominently, and the closest one auto-selects — echoing
-// the in-game behavior where scrolling the list moves the selection cursor.
+// Scroll-focus effect: entries nearer the vertical center scale up and
+// fade in more; the entry closest to center also becomes the selected
+// entry (red, shown in the detail panel) — so "enlarged" and "selected"
+// are always describing the same entry, never two different ones.
 function updateScrollFocus() {
   if (!pdxList) return;
   const listRect = pdxList.getBoundingClientRect();
@@ -136,8 +174,10 @@ function updateScrollFocus() {
     const distance = Math.abs(centerY - entryCenter);
     const maxDistance = listRect.height / 2;
     const proximity = Math.max(0, 1 - distance / maxDistance);
-    const scale = 1 + proximity * 0.14;
+    const scale = 0.88 + proximity * 0.32;
+    const opacity = 0.45 + proximity * 0.55;
     entry.style.transform = `scale(${scale})`;
+    entry.style.opacity = opacity;
 
     if (distance < closestDistance) {
       closestDistance = distance;
@@ -152,8 +192,13 @@ function updateScrollFocus() {
 
 if (pdxList) {
   pdxList.addEventListener('scroll', updateScrollFocus);
-  window.addEventListener('resize', updateScrollFocus);
-  // Initial paint
+  window.addEventListener('resize', () => {
+    setupSpacers();
+    updateScrollFocus();
+  });
+  // Initial paint: size spacers first so the first entry can truly sit at
+  // center, then select + center it, then compute the curve once.
+  setupSpacers();
   showCategory('projects');
   updateScrollFocus();
 }
