@@ -51,6 +51,8 @@ const pdxData = {
     cat: 'Internship / Research',
     num: '#001',
     title: 'PFAS Water Contamination Research',
+    location: 'CSUF - Engineering Department',
+    duration: 'Sept 2022 - Apr 2023',
     desc: 'Researched PFAS contamination levels to assess health and safety concerns for local water supplies. Pulled and cross-referenced data across multiple databases, then compiled findings into structured reports for faculty review.',
     stack: ['Data Analysis', 'Research', 'Documentation'],
     links: []
@@ -84,6 +86,7 @@ function renderDetail(id) {
       <span class="pdx-detail-cat">${d.cat}</span>
     </div>
     <h3 class="pdx-detail-title">${d.title}</h3>
+    <p class="pdx-detail-location">${d.location || ''}</p>
     <p class="pdx-detail-duration">${d.duration || ''}</p>
     <p class="pdx-detail-desc">${d.desc}</p>
     <div class="pdx-detail-stack">${d.stack.map(s => `<span>${s}</span>`).join('')}</div>
