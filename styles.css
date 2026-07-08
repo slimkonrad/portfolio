@@ -84,8 +84,7 @@ a { color: inherit; }
   position: sticky;
   top: 0;
   z-index: 10;
-  background: rgba(21, 34, 58, 0.9);
-  backdrop-filter: blur(6px);
+  background: rgba(21, 34, 58, 0.97);
   border-bottom: 3px solid var(--ink);
 }
 .header-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
@@ -105,7 +104,7 @@ a { color: inherit; }
 .nav a:hover { color: var(--dex-red); }
 
 /* ---------- HERO / TRAINER CARD ---------- */
-.hero { padding: 64px 24px 56px; position: relative; z-index: 1; }
+.hero { padding: 36px 24px 56px; position: relative; z-index: 1; }
 
 .trainer-card {
   background: var(--screen-raised);
@@ -155,7 +154,30 @@ a { color: inherit; }
 }
 .badge-active { background: var(--dex-red); color: #fff; border-color: var(--ink); }
 
-.hero-sub { max-width: 56ch; color: var(--ink-soft); font-size: 15.5px; margin: 0; }
+.hero-sub { max-width: 56ch; color: var(--ink-soft); font-size: 15.5px; margin: 0 0 28px; }
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--dex-red);
+  color: #fff;
+  font-family: var(--mono);
+  font-weight: 700;
+  font-size: 14px;
+  padding: 16px 22px;
+  border-radius: 8px;
+  border: 3px solid var(--ink);
+  text-decoration: none;
+  box-shadow: 0 0 24px rgba(226, 72, 60, 0.45);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.hero-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 32px rgba(226, 72, 60, 0.65);
+}
+.hero-cta-icon { font-family: var(--pixel); font-size: 12px; }
+.hero-cta-arrow { font-size: 16px; }
 
 /* ---------- SECTIONS ---------- */
 .section { padding: 56px 24px; border-top: 3px dashed var(--line); position: relative; z-index: 1; }
@@ -253,21 +275,21 @@ a { color: inherit; }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: var(--screen-raised);
+  background: var(--dex-red);
   border: 3px solid var(--ink);
   border-radius: 10px;
-  box-shadow: 0 0 22px rgba(232, 196, 104, 0.18), 0 0 0 1px rgba(232, 196, 104, 0.08);
+  box-shadow: 0 0 24px rgba(226, 72, 60, 0.35);
   padding: 20px 26px;
   text-decoration: none;
-  color: var(--ink);
+  color: #fff;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 .dex-teaser:hover {
   transform: translate(-2px, -2px);
-  box-shadow: 0 0 32px rgba(232, 196, 104, 0.32), 0 0 0 1px rgba(232, 196, 104, 0.15);
+  box-shadow: 0 0 32px rgba(226, 72, 60, 0.55);
 }
 .dex-teaser-label { font-family: var(--pixel); font-size: 0.85rem; }
-.dex-teaser-arrow { color: var(--dex-red); font-size: 1.2rem; }
+.dex-teaser-arrow { color: #fff; font-size: 1.2rem; }
 
 /* ---------- POKÉDEX COMPONENT ---------- */
 .pokedex {

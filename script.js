@@ -193,7 +193,14 @@ function updateScrollFocus() {
 }
 
 if (pdxList) {
-  pdxList.addEventListener('scroll', updateScrollFocus);
+  let scrollFrame = null;
+  pdxList.addEventListener('scroll', () => {
+    if (scrollFrame) return;
+    scrollFrame = requestAnimationFrame(() => {
+      updateScrollFocus();
+      scrollFrame = null;
+    });
+  });
   window.addEventListener('resize', () => {
     setupSpacers();
     updateScrollFocus();
@@ -203,4 +210,28 @@ if (pdxList) {
   setupSpacers();
   showCategory('projects');
   updateScrollFocus();
+
+  // Step navigation: instead of free mouse-wheel scrolling (which moves a
+  // fixed pixel distance per notch and can overshoot past more than one
+  // entry), each wheel notch moves the selection exactly one entry at a
+  // time — closer to how the in-game list steps deliberately.
+  let wheelLocked = false;
+  pdxList.addEventListener('wheel', (e) => {
+    e.preventDefault();
+    if (wheelLocked) return;
+    wheelLocked = true;
+
+    const visible = Array.from(pdxEntries).filter(en => !en.hidden);
+    const currentIndex = visible.findIndex(en => en.classList.contains('is-selected'));
+    const direction = e.deltaY > 0 ? 1 : -1;
+    const nextIndex = Math.min(visible.length - 1, Math.max(0, currentIndex + direction));
+    const nextEntry = visible[nextIndex];
+
+    if (nextEntry) {
+      selectEntry(nextEntry);
+      centerEntry(nextEntry);
+    }
+
+    setTimeout(() => { wheelLocked = false; }, 220);
+  }, { passive: false });
 }
