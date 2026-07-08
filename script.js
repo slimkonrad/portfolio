@@ -39,13 +39,15 @@ const pdxData = {
     stack: ['Swift', 'iOS', 'Xcode'],
     links: [{ label: 'Code →', href: 'https://github.com/slimkonrad/Color-Wheel-Clock' }]
   },
-  'proj-add': {
+  globegrid: {
     cat: 'CS Project',
     num: '#002',
-    title: '[Next capture]',
-    desc: 'Add your next class project or hackathon build here — swap this entry\'s data in script.js and its button in index.html.',
-    stack: ['Add tools'],
-    links: []
+    title: 'Globe-Grid',
+    location: 'Hackathon — Team The Jons',
+    duration: '2026',
+    desc: 'An AI-generated 3D voxel world you fly through in real time. A theme (typed by the player) gets painted as a 2D top-down concept map by Gemini\'s image model, a second Gemini call reads that painting to assign terrain heights, and Godot extrudes the result into an explorable 3D landscape with a matching generated soundtrack. Built with 3 teammates (Fabian Osegueda, Sophia Beker, Kevin Fuentes).',
+    stack: ['Python', 'Godot', 'GDScript', 'Gemini API', 'Lyria 3'],
+    links: [{ label: 'Code →', href: 'https://github.com/slimkonrad/Build-With-Gemini' }]
   },
   pfas: {
     cat: 'Internship / Research',
