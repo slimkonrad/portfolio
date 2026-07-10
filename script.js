@@ -112,11 +112,23 @@ function selectEntry(entry) {
   renderDetail(entry.dataset.detail);
 }
 
+let isAutoScrolling = false;
+let autoScrollTimer = null;
+
 function centerEntry(entry) {
   if (!entry || !pdxList) return;
   const listRect = pdxList.getBoundingClientRect();
   const entryRect = entry.getBoundingClientRect();
   const offset = (entryRect.top + entryRect.height / 2) - (listRect.top + listRect.height / 2);
+
+  // We already know the target entry (it was just explicitly selected by the
+  // click/wheel handler) — lock out the geometry-driven re-select below for
+  // the duration of the smooth-scroll animation so an entry that's merely
+  // passing through center mid-transition doesn't briefly flash its detail.
+  isAutoScrolling = true;
+  clearTimeout(autoScrollTimer);
+  autoScrollTimer = setTimeout(() => { isAutoScrolling = false; }, 450);
+
   pdxList.scrollTop += offset;
 }
 
@@ -187,7 +199,7 @@ function updateScrollFocus() {
     }
   });
 
-  if (closestEntry && !closestEntry.classList.contains('is-selected')) {
+  if (closestEntry && !isAutoScrolling && !closestEntry.classList.contains('is-selected')) {
     selectEntry(closestEntry);
   }
 }
